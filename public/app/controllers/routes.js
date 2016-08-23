@@ -9,7 +9,6 @@ angular.module('app')
                 views: {
                     'header': {
                         templateUrl: '/nav.html',
-                        controller: 'navCtrl'
                     },
                     'content': {
                         templateUrl: '/home.html',
