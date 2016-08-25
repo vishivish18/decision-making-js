@@ -37,7 +37,7 @@
             }
         ],
         "callback-return": "error",
-        "camelcase": "error",
+        "camelcase": "off",
         "comma-dangle": [
             "error",
             "only-multiline"
@@ -125,7 +125,7 @@
         "no-extend-native": "error",
         "no-extra-bind": "error",
         "no-extra-label": "error",
-        "no-extra-parens": "error",
+        "no-extra-parens": "off",
         "no-floating-decimal": "error",
         "no-global-assign": "error",
         "no-implicit-coercion": "error",
@@ -203,7 +203,7 @@
         "no-useless-rename": "error",
         "no-var": "off",
         "no-void": "off",
-        "no-warning-comments": "error",
+        "no-warning-comments": "off",
         "no-whitespace-before-property": "error",
         "no-with": "error",
         "object-curly-newline": "off",
@@ -235,7 +235,7 @@
         "quote-props": "off",
         "quotes": "off",
         "radix": [
-            "error",
+            "off",
             "always"
         ],
         "require-jsdoc": "off",
