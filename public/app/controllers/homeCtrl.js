@@ -13,6 +13,5 @@ angular.module('app')
                 console.log(err)
           });
         }
-        $scope.setup();
-        
+        $scope.setup();        
     })

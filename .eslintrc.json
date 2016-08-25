@@ -12,7 +12,8 @@
           "process": true,
           "module": true,
           "__dirname": true,
-          "angular": true
+          "angular": true,
+          "_": true
       },
     "rules": {
         "accessor-pairs": "error",

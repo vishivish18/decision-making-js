@@ -132,7 +132,8 @@ angular.module('app')
             wicketsTaken: wicketsTaken,
             runsConceded: runsConceded,
             bowlingAverage: (runsConceded / wicketsTaken).toFixed(2),
-            catches: catches
+            catches: catches,
+            allCenturies: centuriesScored
           };
           if(callback && (typeof callback === 'function')) {
               return callback(stats);
