@@ -2139,7 +2139,7 @@
 						datasetLabel: dataset.label,
 						strokeColor : dataset.strokeColor,
             fillColor : dataset.fillColor[index], //Modified to accept mutiple colors, basically array of colors
-						highlightFill : dataset.highlightFill || dataset.fillColor,
+						highlightFill : dataset.highlightFill || dataset.fillColor[index],
 						highlightStroke : dataset.highlightStroke || dataset.strokeColor
 					}));
 				},this);

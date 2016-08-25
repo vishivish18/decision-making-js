@@ -14,9 +14,9 @@ angular.module('app')
         var colors = [];
         centuryStats.map(function(res, key){
           if(res.result == "won"){
-            colors[key] = "blue"
+            colors[key] = "#0084FF"
           }else if(res.result == "lost"){
-            colors[key] = "red"
+            colors[key] = "#ED3F2F"
           }else if(res.result == "tied"){
             colors[key] = "black"
           }else{
@@ -35,6 +35,7 @@ angular.module('app')
         var noresult = _.filter(centuryStats, function(cent){
           return cent.result === "n/r"
         })
+        $scope.winningRatio = (won.length/centuryStats.length).toFixed(2) * 10;
         $scope.prepareBarGraph(scores, against, colors)
         $scope.prepareDoughnutChart(won.length, lost.length, tied.length, noresult.length)
       }
@@ -44,6 +45,11 @@ angular.module('app')
                datasets: [{
                    label: 'Centuries',
                    fillColor: colors,
+                   strokeColor: 'rgba(220,220,220,1)',
+                   pointColor: 'rgba(220,220,220,1)',
+                   pointStrokeColor: '#fff',
+                   pointHighlightFill: '#fff',
+                   pointHighlightStroke: 'rgba(220,220,220,1)',
                    data: scores
                }]
            };
