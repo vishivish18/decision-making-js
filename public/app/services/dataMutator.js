@@ -1,14 +1,14 @@
 //Things we can get from the data : -
-//Total matches played
-//Total centuries scored
+//Total matches played -done
+//Total centuries scored - done
 //runs scored in a year
 //centuries scored in a year
 //half centuries scored in a year
 //half centuries coverted into century
 //nervous nineties
 //score against the teams
-//score in the winning cause
-//bowling figures
+//score in the winning cause - done
+//bowling figures- done
 //performance in close matches
 //batting first performance
 //moving average, longitudanal career growth
@@ -91,13 +91,13 @@ angular.module('app')
                   halfCenturyDetail.runs = value.batting_score
                   halfCenturyDetail.against = value.opposition
                   halfCenturyDetail.result = value.match_result
-                  halfCenturyDetail.year = value.date
+                  halfCenturyDetail.year = (new Date(Date.parse(value.date))).getFullYear()
                   halfCenturiesScored.push(halfCenturyDetail)
                 }else if(value.batting_score >= 100){
                   centuryDetail.runs = value.batting_score
                   centuryDetail.against = value.opposition
                   centuryDetail.result = value.match_result
-                  centuryDetail.year = value.date
+                  centuryDetail.year = (new Date(Date.parse(value.date))).getFullYear()
                   centuriesScored.push(centuryDetail)
                 }
                 //Saving total runs

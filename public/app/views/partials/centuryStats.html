@@ -1,5 +1,11 @@
 <div class="col-xs-12 personal-info-card top-buffer">
-  <h1>Centuries</h1>
-  <canvas tc-chartjs-bar chart-options="baroptions" chart-data="bardata"></canvas>
-  {{centuryStats}}
+  <h1>Analysis of centuries</h1>
+  <div class="col-xs-12">
+    <h3>All Centuries</h3>
+    <canvas tc-chartjs-bar chart-options="baroptions" chart-data="bardata"></canvas>
+  </div>
+  <div class="col-xs-12 col-md-4">
+    <h3>Centuries and the result</h3>
+    <canvas tc-chartjs-doughnut chart-options="options" chart-data="resources"></canvas>
+  </div>
 </div>
