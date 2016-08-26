@@ -2,8 +2,8 @@
 //Total matches played -done
 //Total centuries scored - done
 //runs scored in a year
-//centuries scored in a year
-//half centuries scored in a year
+//centuries scored in a year - done
+//half centuries scored in a year - done
 //half centuries coverted into century
 //nervous nineties
 //score against the teams
@@ -91,12 +91,14 @@ angular.module('app')
                   halfCenturyDetail.runs = value.batting_score
                   halfCenturyDetail.against = value.opposition
                   halfCenturyDetail.result = value.match_result
+                  halfCenturyDetail.innings = value.batting_innings
                   halfCenturyDetail.year = (new Date(Date.parse(value.date))).getFullYear()
                   halfCenturiesScored.push(halfCenturyDetail)
                 }else if(value.batting_score >= 100){
                   centuryDetail.runs = value.batting_score
                   centuryDetail.against = value.opposition
                   centuryDetail.result = value.match_result
+                  centuryDetail.innings = value.batting_innings
                   centuryDetail.year = (new Date(Date.parse(value.date))).getFullYear()
                   centuriesScored.push(centuryDetail)
                 }
@@ -133,7 +135,7 @@ angular.module('app')
             runsConceded: runsConceded,
             bowlingAverage: (runsConceded / wicketsTaken).toFixed(2),
             catches: catches,
-            allCenturies: centuriesScored
+            allCenturies: {centuriesScored,halfCenturiesScored}
           };
           if(callback && (typeof callback === 'function')) {
               return callback(stats);
