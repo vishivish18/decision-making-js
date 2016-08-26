@@ -4,8 +4,7 @@
 //runs scored in a year
 //centuries scored in a year - done
 //half centuries scored in a year - done
-//half centuries coverted into century
-//nervous nineties
+//half centuries coverted into century - done
 //score against the teams
 //score in the winning cause - done
 //bowling figures- done
@@ -16,13 +15,13 @@
 //batting second performance (while chasing)
 
 //TODO:
-//Get centuries by country
-//Get centuries by year
+//Get centuries by country-done
+//Get centuries by year-done
 //Get runs by country
 //Get runs by year
 //Get runs by winning
 //Get runs by loosing
-//Get centuries in winning cause
+//Get centuries in winning cause-done 
 
 
 

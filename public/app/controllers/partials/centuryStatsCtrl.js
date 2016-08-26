@@ -10,13 +10,16 @@ angular.module('app')
       $scope.analyzeCenturies = function(centuryStats){
         var scores = _.pluck(centuryStats.centuriesScored, 'runs')
         var against = _.pluck(centuryStats.centuriesScored, 'against')
+
+        var totalFifties = centuryStats.halfCenturiesScored.length
+        var totalHundreds = centuryStats.centuriesScored.length
         //Send array of colors to chartjs
         var colors = [];
         centuryStats.centuriesScored.map(function(res, key){
           if(res.result == "won"){
-            colors[key] = "#0084FF"
+            colors[key] = "rgba(0,132,255,0.8)"
           }else if(res.result == "lost"){
-            colors[key] = "#ED3F2F"
+            colors[key] = "rgba(237,63,47,0.8)"
           }else if(res.result == "tied"){
             colors[key] = "black"
           }else{
@@ -36,6 +39,23 @@ angular.module('app')
         // var noresult = _.filter(centuryStats.centuriesScored, function(cent){
         //   return cent.result === "n/r"
         // })
+
+        //Century while chasing
+        var chasingCenturies = _.filter(centuryStats.centuriesScored, function(cent){
+          return cent.innings == "2nd"
+        })
+        var winchasingCenturies = _.filter(chasingCenturies, function(cent){
+          return cent.result == "won"
+        })
+        var lostchasingCenturies = _.filter(chasingCenturies, function(cent){
+          return cent.result === "lost"
+        })
+        var tiedchasingCenturies = _.filter(chasingCenturies, function(cent){
+          return cent.result === "tied"
+        })
+        var noresultchasingCenturies = _.filter(chasingCenturies, function(cent){
+          return cent.result === "n/r"
+        })
 
         //Century against teams
         var centuryAgainstTeams = [];
@@ -78,8 +98,9 @@ angular.module('app')
         $scope.winningRatio = (won.length/centuryStats.centuriesScored.length).toFixed(2) * 10;
         $scope.prepareBarGraph(scores, against, colors)
         $scope.prepareBarGraphAgainstTeam(centuryAgainstTeams)
-        //$scope.prepareDoughnutChart(won.length, lost.length, tied.length, noresult.length)
         $scope.prepareLineGraph(centuryByYear,halfCenturyByYear);
+        $scope.prepareDoughnutChart(winchasingCenturies.length,lostchasingCenturies.length,tiedchasingCenturies.length,noresultchasingCenturies.length)
+        $scope.prepareConversionRatePieChart(totalFifties,totalHundreds)
       }
 
 
@@ -354,6 +375,58 @@ angular.module('app')
 
            };
 
+      }
+
+      $scope.prepareConversionRatePieChart = function(fifty,hundred){
+            $scope.conversionData = [
+          {
+            value: fifty,
+            color:'#F7464A',
+            highlight: '#FF5A5E',
+            label: 'Half Centuries'
+          },
+          {
+            value: hundred,
+            color: '#FDB45C',
+            highlight: '#FFC870',
+            label: 'Centuries'
+          }
+        ];
+
+        // Chart.js Options
+        $scope.conversionOptions =  {
+
+          // Sets the chart to be responsive
+          responsive: true,
+
+          //Boolean - Whether we should show a stroke on each segment
+          segmentShowStroke : true,
+
+          //String - The colour of each segment stroke
+          segmentStrokeColor : '#fff',
+
+          //Number - The width of each segment stroke
+          segmentStrokeWidth : 2,
+
+          //Number - The percentage of the chart that we cut out of the middle
+          percentageInnerCutout : 0, // This is 0 for Pie charts
+
+          //Number - Amount of animation steps
+          animationSteps : 100,
+
+          //String - Animation easing effect
+          animationEasing : 'easeOutBounce',
+
+          //Boolean - Whether we animate the rotation of the Doughnut
+          animateRotate : true,
+
+          //Boolean - Whether we animate scaling the Doughnut from the centre
+          animateScale : false,
+
+          //String - A legend template
+          legendTemplate : '<ul class="tc-chart-js-legend"><% for (var i=0; i<segments.length; i++){%><li><span style="background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>'
+
+        };
       }
 
 
