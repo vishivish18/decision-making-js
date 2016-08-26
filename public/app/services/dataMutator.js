@@ -21,7 +21,7 @@
 //Get runs by year
 //Get runs by winning
 //Get runs by loosing
-//Get centuries in winning cause-done 
+//Get centuries in winning cause-done
 
 
 
@@ -63,12 +63,14 @@ angular.module('app')
             var totalRuns = 0;
             var centuriesScored = [];
             var halfCenturiesScored = [];
+            var allInnings = [];
             var notOuts = 0;
             var didNotBat = 0;
             var wicketsTaken = 0;
             var runsConceded = 0;
             var catches = 0;
             angular.forEach(data, function(value) {
+              var inningsDetail = {};
               var centuryDetail = {};
               var halfCenturyDetail = {};
 
@@ -85,6 +87,12 @@ angular.module('app')
               }else{
                 //Converting the string to integers to do calculations
                 value.batting_score = parseInt(value.batting_score)
+                inningsDetail.runs = value.batting_score
+                inningsDetail.against = value.opposition
+                inningsDetail.result = value.match_result
+                inningsDetail.innings = value.batting_innings
+                inningsDetail.year = (new Date(Date.parse(value.date))).getFullYear()
+                allInnings.push(inningsDetail)
                 //Checking to see if the score was a half century or century
                 if(value.batting_score >= 50 && value.batting_score < 100){
                   halfCenturyDetail.runs = value.batting_score
@@ -134,7 +142,8 @@ angular.module('app')
             runsConceded: runsConceded,
             bowlingAverage: (runsConceded / wicketsTaken).toFixed(2),
             catches: catches,
-            allCenturies: {centuriesScored,halfCenturiesScored}
+            allCenturies: {centuriesScored,halfCenturiesScored},
+            allInnings: allInnings
           };
           if(callback && (typeof callback === 'function')) {
               return callback(stats);
