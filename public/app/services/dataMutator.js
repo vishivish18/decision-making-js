@@ -81,9 +81,9 @@ angular.module('app')
               //check to see if the score contains a * in the end which dentoes NotOuts, if yes remove for calculations
               if(value.batting_score.indexOf("*") > -1){
                 if(value.batting_innings == "1st"){
-                  secondInningsNotouts++;
-                }else{
                   firstInningsNotouts++;
+                }else{
+                  secondInningsNotouts++;
                 }
                 value.batting_score = value.batting_score.replace('*','');
                 notOuts++;
