@@ -3,8 +3,8 @@ angular.module('app')
         $scope.setup = function() {
           dataMutator.getData()
           .then(function(response) {
-                dataMutator.csvToJSON(response.data, function(csv){
-                    dataMutator.getCareerStats(csv, function(stats){
+                dataMutator.csvToJSON(response.data, function(json){
+                    dataMutator.getCareerStats(json, function(stats){
                       console.log(stats)
                       $scope.stats = stats
                     })
@@ -13,5 +13,5 @@ angular.module('app')
                 console.log(err)
           });
         }
-        $scope.setup();        
+        $scope.setup();
     })

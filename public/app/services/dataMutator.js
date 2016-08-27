@@ -69,6 +69,8 @@ angular.module('app')
             var wicketsTaken = 0;
             var runsConceded = 0;
             var catches = 0;
+            var firstInningsNotouts = 0;
+            var secondInningsNotouts = 0;
             angular.forEach(data, function(value) {
               var inningsDetail = {};
               var centuryDetail = {};
@@ -78,6 +80,11 @@ angular.module('app')
 
               //check to see if the score contains a * in the end which dentoes NotOuts, if yes remove for calculations
               if(value.batting_score.indexOf("*") > -1){
+                if(value.batting_innings == "1st"){
+                  secondInningsNotouts++;
+                }else{
+                  firstInningsNotouts++;
+                }
                 value.batting_score = value.batting_score.replace('*','');
                 notOuts++;
               }
@@ -87,12 +94,15 @@ angular.module('app')
               }else{
                 //Converting the string to integers to do calculations
                 value.batting_score = parseInt(value.batting_score)
+                //Getting all innings runs
                 inningsDetail.runs = value.batting_score
                 inningsDetail.against = value.opposition
                 inningsDetail.result = value.match_result
                 inningsDetail.innings = value.batting_innings
                 inningsDetail.year = (new Date(Date.parse(value.date))).getFullYear()
                 allInnings.push(inningsDetail)
+
+
                 //Checking to see if the score was a half century or century
                 if(value.batting_score >= 50 && value.batting_score < 100){
                   halfCenturyDetail.runs = value.batting_score
@@ -127,6 +137,8 @@ angular.module('app')
                 runsConceded += value.runs_conceded;
               }
             });
+          console.log(firstInningsNotouts);
+          console.log(secondInningsNotouts);
 
           var totalInnings = totalMatches - didNotBat
           var stats = {
@@ -143,7 +155,7 @@ angular.module('app')
             bowlingAverage: (runsConceded / wicketsTaken).toFixed(2),
             catches: catches,
             allCenturies: {centuriesScored,halfCenturiesScored},
-            allInnings: allInnings
+            allInnings: {allInnings,firstInningsNotouts,secondInningsNotouts}
           };
           if(callback && (typeof callback === 'function')) {
               return callback(stats);
