@@ -5,12 +5,11 @@ angular.module('app')
           .then(function(response) {
                 dataMutator.csvToJSON(response.data, function(json){
                     dataMutator.getCareerStats(json, function(stats){
-                      console.log(stats)
                       $scope.stats = stats
                     })
                 })
           }, function(err) {
-                console.log(err)
+                console.error(err)
           });
         }
         $scope.setup();

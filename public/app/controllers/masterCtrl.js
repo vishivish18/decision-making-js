@@ -1,4 +1,4 @@
 angular.module('app')
-    .controller('masterCtrl', function($scope, $rootScope) {
-        console.log("masterCtrl");
+    .controller('masterCtrl', function() {
+        console.info("masterCtrl");
     })

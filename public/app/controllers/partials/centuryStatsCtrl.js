@@ -17,13 +17,13 @@ angular.module('app')
         var colors = [];
         centuryStats.centuriesScored.map(function(res, key){
           if(res.result == "won"){
-            colors[key] = "rgba(0,132,255,0.8)"
+            colors[key] = "#0084FF"
           }else if(res.result == "lost"){
-            colors[key] = "rgba(237,63,47,0.8)"
+            colors[key] = "#ED3F2F"
           }else if(res.result == "tied"){
-            colors[key] = "black"
+            colors[key] = "#DFF8EB"
           }else{
-            colors[key] = "yellow"
+            colors[key] = "#DDB967"
           }
           return colors
         })
@@ -91,8 +91,6 @@ angular.module('app')
                   halfCenturyByYear[year] = []
           return halfCenturyByYear[year].push(halfCentury)
         })
-
-        console.log(centuryByYear,halfCenturyByYear)
 
 
         $scope.winningRatio = (won.length/centuryStats.centuriesScored.length).toFixed(2) * 10;
@@ -173,7 +171,7 @@ angular.module('app')
                labels: againstForCenturies,
                datasets: [{
                    label: 'Centuries',
-                   fillColor: ['blue'],
+                   fillColor: ['#0084FF'],
                    strokeColor: 'rgba(220,220,220,1)',
                    pointColor: 'rgba(220,220,220,1)',
                    pointStrokeColor: '#fff',
@@ -244,8 +242,7 @@ angular.module('app')
           var yearWithNoCentury = _.filter(yearOfhalfCenturies, function(el){
             return yearOfcenturies.indexOf(el) < 0
           })
-          console.log(yearWithNoHalfCentury)
-          console.log(yearWithNoCentury)
+
           // Taking union of both years of centuries and half centuries, CLEAN IT UP LATER
           var allYearsForData = _.union(yearOfcenturies,yearOfhalfCenturies).sort()
           var indexOfNoHalfcentury = yearWithNoHalfCentury.map(function(res){
@@ -253,7 +250,7 @@ angular.module('app')
           })
           var indexOfNoCentury = yearWithNoCentury.map(function(res){
               return allYearsForData.indexOf(res)
-          })          
+          })
           //Add insert method add prototype level later
           indexOfNoCentury.map(function(res){
             return numberOfCenturies.splice(res, 0, 0);
@@ -266,9 +263,9 @@ angular.module('app')
           datasets: [
             {
               label: 'Half Centuries over the years',
-              fillColor: ['rgba(120,20,220,0.4)'],
-              strokeColor: 'rgba(220,220,220,1)',
-              pointColor: 'rgba(220,220,220,1)',
+              fillColor: ['rgba(0,132,255,0.4)'],
+              strokeColor: 'rgba(0,132,255,0.4)',
+              pointColor: 'rgba(0,132,255,0.4)',
               pointStrokeColor: '#fff',
               pointHighlightFill: '#fff',
               pointHighlightStroke: 'rgba(220,220,220,1)',
@@ -277,8 +274,8 @@ angular.module('app')
             {
               label: 'Centuries',
               fillColor: ['rgba(220,220,220,0.6)'],
-              strokeColor: 'rgba(220,220,220,1)',
-              pointColor: 'rgba(220,220,220,1)',
+              strokeColor: 'rgba(220,220,220,0.6)',
+              pointColor: 'rgba(220,220,220,0.6)',
               pointStrokeColor: '#fff',
               pointHighlightFill: '#fff',
               pointHighlightStroke: 'rgba(220,220,220,1)',
@@ -344,17 +341,17 @@ angular.module('app')
                value: won,
                color: '#FFFF00',
                highlight: '#e5e500',
-               label: 'Win'
+               label: 'India Won'
            }, {
                value: lost,
                color: '#46BFBD',
                highlight: '#5AD3D1',
-               label: 'Loss'
+               label: 'India Lost'
            }, {
                value: tied,
                color: '#F7464A',
                highlight: '#FF5A5E',
-               label: 'Tie'
+               label: 'Match Tied'
            }, {
                value: noresult,
                color: '#F7464A',

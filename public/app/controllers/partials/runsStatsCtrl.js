@@ -68,9 +68,9 @@ angular.module('app')
         var colors = [];
         runs.map(function(res, key){
           if(res >= 1000){
-            return colors[key] = "yellow"
+            return colors[key] = "#FFFF00"
           }else{
-            return colors[key] = "blue"
+            return colors[key] = "#0084FF"
           }
         })
 
@@ -135,7 +135,7 @@ angular.module('app')
                labels: teams,
                datasets: [{
                    label: 'Runs Over the years',
-                   fillColor: ['blue'],
+                   fillColor: ['#0084FF'],
                    strokeColor: 'rgba(220,220,220,1)',
                    pointColor: 'rgba(220,220,220,1)',
                    pointStrokeColor: '#fff',

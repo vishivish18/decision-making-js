@@ -51,7 +51,6 @@ angular.module('app')
                 }
                 result.push(obj);
             }
-            console.log(result)
             if(callback && (typeof callback === 'function')) {
                 return callback(result);
             }
@@ -137,8 +136,6 @@ angular.module('app')
                 runsConceded += value.runs_conceded;
               }
             });
-          console.log(firstInningsNotouts);
-          console.log(secondInningsNotouts);
 
           var totalInnings = totalMatches - didNotBat
           var stats = {
@@ -154,8 +151,15 @@ angular.module('app')
             runsConceded: runsConceded,
             bowlingAverage: (runsConceded / wicketsTaken).toFixed(2),
             catches: catches,
-            allCenturies: {centuriesScored,halfCenturiesScored},
-            allInnings: {allInnings,firstInningsNotouts,secondInningsNotouts}
+            allCenturies: {
+              "centuriesScored":centuriesScored,
+              "halfCenturiesScored":halfCenturiesScored
+            },
+            allInnings: {
+              "allInnings":allInnings,
+              "firstInningsNotouts":firstInningsNotouts,
+              "secondInningsNotouts":secondInningsNotouts
+            }
           };
           if(callback && (typeof callback === 'function')) {
               return callback(stats);

@@ -1,24 +1,36 @@
-<div class="col-xs-12 personal-info-card top-buffer">
-  <h1>Analysis of runs scored</h1>
+<div class="col-xs-12 card top-buffer">
+  <h2 class="card-heading">Analysis of runs scored</h2>
   <div class="col-xs-12">
     <h3>Runs over the years</h3>
+    <legends description="More than thousand runs" color="#FFFF00"></legends>
+    <legends description="Less than thousand runs" color="#0084FF"></legends>
     <canvas tc-chartjs-bar chart-options="yearBaroptions" chart-data="yearBardata"></canvas>
     <h4>More than a thousand runs in a calendar year</h4>
-    <h6>We can see that sachin scored more than a thousand runs 7 times in his career</h6>
+    <p>We can see that sachin scored <strong>more than a thousand runs 7 times</strong> in his career</p>
+    <hr>
   </div>
   <div class="col-xs-12">
     <h3>Runs against teams</h3>
+    <legends description="Runs scored against teams" color="#0084FF"></legends>
     <canvas tc-chartjs-bar chart-options="teamBaroptions" chart-data="teamBardata"></canvas>
-    <h4>He scored most of his runs against the top cricketing nations</h4>
+    <h4>Tougher the better</h4>
+    <p>He scored most of his runs against the top cricketing nations like <strong>Australia, Sri Lanka and Pakistan</strong></p>
+    <hr>
   </div>
   <div class="col-xs-12 col-md-6">
     <h3>Runs in the innings</h3>
+    <legends description="Runs sored in batting first" color="#FFFF00"></legends>
+    <legends description="Runs scored batting second" color="#46BFBD"></legends>
     <canvas tc-chartjs-doughnut chart-options="inniningsRunsoptions" chart-data="inniningsRunsresources"></canvas>
-    <h4>Be it setting a target or chasing one, he was always good</h4>
+    <h4>Equally balanced</h4>
+    <p>Be it setting a target or chasing one, he was always good and <strong>scored runs in both the innings</strong> equally well</p>
   </div>
   <div class="col-xs-12 col-md-6">
     <h3>Average in the innings</h3>
+    <legends description="Average batting second" color="#F7464A"></legends>
+    <legends description="Average batting first" color="#FDB45C"></legends>
     <canvas tc-chartjs-pie chart-options="averageOptions" chart-data="averageData"></canvas>
-    <h4>He averaged above 40 in both the innings</h4>
+    <h4>Equally poised</h4>
+    <p>He <strong>averaged above 40</strong> in both the innings</p>
   </div>
 </div>

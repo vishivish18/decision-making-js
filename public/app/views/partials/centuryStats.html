@@ -1,40 +1,55 @@
-<div class="col-xs-12 personal-info-card top-buffer">
-  <h1>Analysis of centuries</h1>
-  <div class="col-xs-12">
-    <h3>All Centuries and the results</h3>
+<div class="col-xs-12 card top-buffer">
+  <h2 class="card-heading">Analysis of centuries</h2>
+  <div class="col-xs-12 section">
+    <h3 class="card-subheading">All Centuries and the results</h3>
+    <legends description="India Won" color="#0084FF"></legends>
+    <legends description="India Lost" color="#ED3F2F"></legends>
+    <legends description="Match Tied" color="#DFF8EB"></legends>
+    <legends description="No Result" color="#DDB967"></legends>
     <canvas tc-chartjs-bar chart-options="baroptions" chart-data="bardata"></canvas>
     <h4>Winning Ratio</h4>
-    <h6>Centuries while winning / Total Centuries = 33 / 49 = {{winningRatio}}</h6>
-    <p>That is almost every 7 out of 10 centuries contributed to India's Victory</p>
+    <p>Centuries while winning / Total Centuries = 33 / 49 = {{winningRatio}}</p>
+    <p>That is almost every <strong> 7 out of 10 centuries</strong> of Tendulkar contributed to India's Victory.</p>
+    <hr>
   </div>
-  <div class="col-md-12">
-    <h3>Centuries and Half Centuries</h3>
+  <div class="col-xs-12 section">
+    <h3 class="card-subheading">Centuries and Half Centuries</h3>
     <div class="col-md-6">
-      <h3>Against the opponents</h3>
+      <h4>Against the opponents</h4>
+      <legends description="Number of centuries scored against teams" color="#0084FF"></legends>
       <canvas tc-chartjs-bar chart-options="baroptionsAgainstTeam" chart-data="bardataAgainstTeam"></canvas>
       <h4>Best against the best</h4>
-      <h6>We can see tendulkar scored most of his centuries against the best teams like Australia.</h6>
+      <p>We can see Tendulkar scored most of his centuries against the best teams like Australia, Sri Lanka etc
+         and scored <strong>century against all the test playing nations.</strong></p>
+         <hr>
     </div>
     <div class="col-xs-12 col-md-6">
-      <h3>Over the years</h3>
+      <h4>Over the years</h4>
+      <legends description="Number of Half Centuries" color="rgba(0,132,255,0.4)"></legends>
+      <legends description="Number of Centuries" color="rgba(220,220,220,0.6)"></legends>
       <canvas tc-chartjs-line chart-options="lineOptions" chart-data="lineData"></canvas>
       <h4>Consistencey</h4>
-      <h6>We can see tendulkar scored as many as 9 centuries in a calendar year, and even when centuries were not
-      coming, he still performed with half centuries</h6>
+      <p>We can see Tendulkar scored as many as <strong>9 centuries in a calendar year</strong>, and even when centuries were not
+      coming, he still performed with half centuries.</p>
+      <hr>
+    </div>
+    <div class="col-md-6">
+      <h4>Centuries while chasing</h4>
+      <legends description="India Won" color="#FFFF00"></legends>
+      <legends description="India Lost" color="#46BFBD"></legends>
+      <canvas tc-chartjs-doughnut chart-options="options" chart-data="resources"></canvas>
+      <h4>Cometh the hour, cometh the man</h4>
+      <p>Tendulkar scored 17 centuries while chasing a target and India won matches 14 out of it. Which is 82% of total, and it depicts almost
+        <strong>8 out of 10 times his centuries while chasing ensured victory.</strong> </p>
+    </div>
+    <div class="col-md-6">
+      <h4>Conversion Rate</h4>
+      <legends description="Half Centuries" color="#F7464A"></legends>
+      <legends description="Centuries" color="#FDB45C"></legends>
+      <canvas tc-chartjs-pie chart-options="conversionOptions" chart-data="conversionData"></canvas>
+      <h4>He was a man of long innings</h4>
+      <p>Out of 145 total ocassions of getting past 50, he converted 49 of them to centuries. Which is 33 % of total, and
+      depicts that almost <strong>one out of every 3 innings more than 50 went on to be centuries.</strong> </p>
     </div>
   </div>
-  <div class="col-md-6">
-    <h3>Centuries while chasing</h3>
-    <canvas tc-chartjs-doughnut chart-options="options" chart-data="resources"></canvas>
-    <h4>Cometh the hour, cometh the man</h4>
-    <h6>Tendulkar scored 17 centuries while chasing a target and India won 14 out of it</h6>
-  </div>
-  <div class="col-md-6">
-    <h3>Conversion Rate</h3>
-    <canvas tc-chartjs-pie chart-options="conversionOptions" chart-data="conversionData"></canvas>
-    <h4>He was a man of long innings</h4>
-    <h6>Out of 145 total ocassions of getting past 50, he converted 49 of them to centuries. Which is 33 % of total, which
-    depicts that almost one out of every 3 innings more than 50 went on to be centuries </h6>
-  </div>
-
 </div>

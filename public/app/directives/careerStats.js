@@ -6,6 +6,5 @@ angular.module('app')
                 stats: '=item',
             },
             templateUrl: 'partials/careerStats.html'
-                //controller: 'app.partials.venues.venueItemCtrl'
         }
     })
