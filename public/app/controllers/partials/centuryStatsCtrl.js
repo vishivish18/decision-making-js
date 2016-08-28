@@ -233,16 +233,39 @@ angular.module('app')
           var numberOfHalfCenturies = []
 
           for(var halfCentury in halfCenturyByYear) {
-            if(centuryByYear.hasOwnProperty(halfCentury)) {
+            if(halfCenturyByYear.hasOwnProperty(halfCentury)) {
               yearOfhalfCenturies.push(halfCentury);
               numberOfHalfCenturies.push(halfCenturyByYear[halfCentury].length)
             }
           }
+          var yearWithNoHalfCentury = _.filter(yearOfcenturies, function(el){
+            return yearOfhalfCenturies.indexOf(el) < 0
+          })
+          var yearWithNoCentury = _.filter(yearOfhalfCenturies, function(el){
+            return yearOfcenturies.indexOf(el) < 0
+          })
+          console.log(yearWithNoHalfCentury)
+          console.log(yearWithNoCentury)
+          // Taking union of both years of centuries and half centuries, CLEAN IT UP LATER
+          var allYearsForData = _.union(yearOfcenturies,yearOfhalfCenturies).sort()
+          var indexOfNoHalfcentury = yearWithNoHalfCentury.map(function(res){
+              return allYearsForData.indexOf(res)
+          })
+          var indexOfNoCentury = yearWithNoCentury.map(function(res){
+              return allYearsForData.indexOf(res)
+          })          
+          //Add insert method add prototype level later
+          indexOfNoCentury.map(function(res){
+            return numberOfCenturies.splice(res, 0, 0);
+          })
+          indexOfNoHalfcentury.map(function(res){
+            return numberOfHalfCenturies.splice(res, 0, 0);
+          })
           $scope.lineData = {
-          labels: yearOfhalfCenturies,
+          labels: allYearsForData,
           datasets: [
             {
-              label: 'My First dataset',
+              label: 'Half Centuries over the years',
               fillColor: ['rgba(120,20,220,0.4)'],
               strokeColor: 'rgba(220,220,220,1)',
               pointColor: 'rgba(220,220,220,1)',
@@ -252,7 +275,7 @@ angular.module('app')
               data: numberOfHalfCenturies
             },
             {
-              label: 'My First dataset',
+              label: 'Centuries',
               fillColor: ['rgba(220,220,220,0.6)'],
               strokeColor: 'rgba(220,220,220,1)',
               pointColor: 'rgba(220,220,220,1)',
