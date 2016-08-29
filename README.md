@@ -14,7 +14,7 @@ A project to make sense out of a CSV data, analyze it, and then visualize it to 
 ### Other gulp tasks
 
 * Run `gulp js` to concat and minify all js in `app.built.js`
-* Run `gulp css` to process Sass to Css
+* Run `gulp css` to process Sass to Css in `app.css`
 
 
 ### Architecture
@@ -22,6 +22,10 @@ A project to make sense out of a CSV data, analyze it, and then visualize it to 
 * It uses node to serve an angular app with MV* architecture
 * All operations are done on this [data](http://decision-making.vishalranjan.in/data/sachin.csv) 
 * The frontend fetches this data and the performs operations to turn it into something meaningful
+
+### Tools Used
+* gulp
+* [tc-chart-js](http://carlcraig.github.io/tc-angular-chartjs/) An angular directive over Charts.js
 
 
 ### Contribution
