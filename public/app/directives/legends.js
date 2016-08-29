@@ -1,6 +1,6 @@
 angular.module('app')
     .directive('legends', function() {
-        return{
+        return {
             restrict: 'EA',
             scope: {
                 description: '@',

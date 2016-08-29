@@ -1,6 +1,6 @@
 angular.module('app')
     .directive('careerStats', function() {
-        return{
+        return {
             restrict: 'E',
             scope: {
                 stats: '=item',

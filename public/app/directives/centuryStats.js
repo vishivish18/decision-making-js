@@ -1,6 +1,6 @@
 angular.module('app')
     .directive('centuryStats', function() {
-        return{
+        return {
             restrict: 'E',
             scope: {
                 centuryStats: '=item',

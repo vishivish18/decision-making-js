@@ -87,7 +87,7 @@
         "jsx-quotes": "error",
         "key-spacing": "off",
         "keyword-spacing": [
-            "error",
+            "off",
             {
                 "after": false,
                 "before": false
@@ -243,7 +243,7 @@
         "rest-spread-spacing": "error",
         "semi": 1,
         "semi-spacing": [
-            "error",
+            "off",
             {
                 "after": false,
                 "before": false

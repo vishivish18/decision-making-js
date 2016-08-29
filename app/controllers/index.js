@@ -1,4 +1,4 @@
-var router = require('express').Router()
-router.use('/', require('./static'))
+var router = require('express').Router();
+router.use('/', require('./static'));
 
-module.exports = router
+module.exports = router;

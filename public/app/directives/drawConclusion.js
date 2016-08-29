@@ -1,6 +1,6 @@
 angular.module('app')
     .directive('drawConclusion', function() {
-        return{
+        return {
             restrict: 'E',
             templateUrl: 'partials/drawConclusion.html'
         };

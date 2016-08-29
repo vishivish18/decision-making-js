@@ -1,3 +1,3 @@
-angular.module('app',[
-  'ngRoute','ui.router','tc.chartjs'
+angular.module('app', [
+    'ngRoute', 'ui.router', 'tc.chartjs'
 ]);

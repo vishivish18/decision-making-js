@@ -1,6 +1,6 @@
 angular.module('app')
     .directive('runsStats', function() {
-        return{
+        return {
             restrict: 'E',
             scope: {
                 runsStats: '=item',
