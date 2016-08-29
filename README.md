@@ -7,7 +7,7 @@ A project to make sense out of a CSV data, analyze it, and then visualize it to 
 
 
 ### Setup
-* git clone `https://gitlab.com/vishivish18/decision-making-js.git`
+* git clone `https://github.com/vishivish18/decision-making-js.git`
 * Run `npm install` from project directory
 * Run `gulp dev` to start project and the magic begins on `localhost:1805`
 
