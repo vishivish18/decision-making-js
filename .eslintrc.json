@@ -119,7 +119,7 @@
         "no-continue": "off",
         "no-div-regex": "error",
         "no-duplicate-imports": "error",
-        "no-else-return": "error",
+        "no-else-return": "off",
         "no-empty-function": "off",
         "no-eq-null": "off",
         "no-eval": "error",
@@ -132,7 +132,7 @@
         "no-implicit-coercion": "error",
         "no-implicit-globals": "error",
         "no-implied-eval": "error",
-        "no-inline-comments": "error",
+        "no-inline-comments": "off",
         "no-inner-declarations": [
             "error",
             "functions"
@@ -241,7 +241,7 @@
         ],
         "require-jsdoc": "off",
         "rest-spread-spacing": "error",
-        "semi": "off",
+        "semi": 1,
         "semi-spacing": [
             "error",
             {

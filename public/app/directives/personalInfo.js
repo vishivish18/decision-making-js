@@ -1,7 +1,7 @@
 angular.module('app')
     .directive('personalInfo', function() {
         return{
-            restrict: 'E',            
+            restrict: 'E',
             templateUrl: 'partials/personalInfo.html'
-        }
-    })
+        };
+    });

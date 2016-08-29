@@ -1,35 +1,47 @@
+// Century Stats controller
+// This controller is attached to a directive - centuryStats
+// and the purpose of this controller is to work on the centuryStats passed to its $scope via its attribute
+
 angular.module('app')
     .controller('centuryStatsCtrl', function($scope) {
+      // Watch for the $scope.centuryStats variable to get the data from attribute
       $scope.$watch(function() {
              return $scope.centuryStats;
            }, function(n) {
-               if(!n)return
-               $scope.analyzeCenturies($scope.centuryStats)
+               if(!n)return;
+               // If it has received data then start working on Analyzing Centuries
+               $scope.analyzeCenturies($scope.centuryStats);
            });
 
       $scope.analyzeCenturies = function(centuryStats){
-        var scores = _.pluck(centuryStats.centuriesScored, 'runs')
-        var against = _.pluck(centuryStats.centuriesScored, 'against')
+        //Get the runs scored while making a century
+        var scores = _.pluck(centuryStats.centuriesScored, 'runs');
 
-        var totalFifties = centuryStats.halfCenturiesScored.length
-        var totalHundreds = centuryStats.centuriesScored.length
+        //Get the opponents againse which the century was scored
+        var against = _.pluck(centuryStats.centuriesScored, 'against');
+
+        //Get the total number of half centuries scored
+        var totalFifties = centuryStats.halfCenturiesScored.length;
+
+        //Get the total number of centuries scored
+        var totalHundreds = centuryStats.centuriesScored.length;
         //Send array of colors to chartjs
         var colors = [];
         centuryStats.centuriesScored.map(function(res, key){
           if(res.result == "won"){
-            colors[key] = "#0084FF"
+            colors[key] = "#0084FF";
           }else if(res.result == "lost"){
-            colors[key] = "#ED3F2F"
+            colors[key] = "#ED3F2F";
           }else if(res.result == "tied"){
-            colors[key] = "#DFF8EB"
+            colors[key] = "#DFF8EB";
           }else{
-            colors[key] = "#DDB967"
+            colors[key] = "#DDB967";
           }
-          return colors
-        })
+          return colors;
+        });
         var won = _.filter(centuryStats.centuriesScored, function(cent){
-          return cent.result == "won"
-        })
+          return cent.result == "won";
+        });
         // var lost = _.filter(centuryStats.centuriesScored, function(cent){
         //   return cent.result === "lost"
         // })
@@ -42,20 +54,20 @@ angular.module('app')
 
         //Century while chasing
         var chasingCenturies = _.filter(centuryStats.centuriesScored, function(cent){
-          return cent.innings == "2nd"
-        })
+          return cent.innings == "2nd";
+        });
         var winchasingCenturies = _.filter(chasingCenturies, function(cent){
-          return cent.result == "won"
-        })
+          return cent.result == "won";
+        });
         var lostchasingCenturies = _.filter(chasingCenturies, function(cent){
-          return cent.result === "lost"
-        })
+          return cent.result === "lost";
+        });
         var tiedchasingCenturies = _.filter(chasingCenturies, function(cent){
-          return cent.result === "tied"
-        })
+          return cent.result === "tied";
+        });
         var noresultchasingCenturies = _.filter(chasingCenturies, function(cent){
-          return cent.result === "n/r"
-        })
+          return cent.result === "n/r";
+        });
 
         //Century against teams
         var centuryAgainstTeams = [];
@@ -63,11 +75,11 @@ angular.module('app')
           var team = res.against;
           var century = {
             score: res.runs
-          }
+          };
           if(typeof(centuryAgainstTeams[team]) == "undefined")
-                  centuryAgainstTeams[team] = []
-          return centuryAgainstTeams[team].push(century)
-        })
+                  centuryAgainstTeams[team] = [];
+          return centuryAgainstTeams[team].push(century);
+        });
 
         //Century over the years
         var centuryByYear = [];
@@ -75,39 +87,34 @@ angular.module('app')
           var year = res.year;
           var century = {
             score: res.runs
-          }
+          };
           if(typeof(centuryByYear[year]) == "undefined")
-                  centuryByYear[year] = []
-          return centuryByYear[year].push(century)
-        })
+                  centuryByYear[year] = [];
+          return centuryByYear[year].push(century);
+        });
 
         var halfCenturyByYear = [];
         centuryStats.halfCenturiesScored.map(function(res){
           var year = res.year;
           var halfCentury = {
             score: res.runs
-          }
+          };
           if(typeof(halfCenturyByYear[year]) == "undefined")
-                  halfCenturyByYear[year] = []
-          return halfCenturyByYear[year].push(halfCentury)
-        })
+                  halfCenturyByYear[year] = [];
+          return halfCenturyByYear[year].push(halfCentury);
+        });
 
 
         $scope.winningRatio = (won.length/centuryStats.centuriesScored.length).toFixed(2) * 10;
-        $scope.prepareBarGraph(scores, against, colors)
-        $scope.prepareBarGraphAgainstTeam(centuryAgainstTeams)
+        $scope.prepareBarGraph(scores, against, colors);
+        $scope.prepareBarGraphAgainstTeam(centuryAgainstTeams);
         $scope.prepareLineGraph(centuryByYear,halfCenturyByYear);
-        $scope.prepareDoughnutChart(winchasingCenturies.length,lostchasingCenturies.length,tiedchasingCenturies.length,noresultchasingCenturies.length)
-        $scope.prepareConversionRatePieChart(totalFifties,totalHundreds)
-      }
+        $scope.prepareDoughnutChart(winchasingCenturies.length,lostchasingCenturies.length,tiedchasingCenturies.length,noresultchasingCenturies.length);
+        $scope.prepareConversionRatePieChart(totalFifties,totalHundreds);
+      };
 
 
-
-
-
-
-
-
+      // Prepare Bar graph to show Century against teams and the match result via colors
       $scope.prepareBarGraph = function (scores,against, colors){
         $scope.bardata = {
                labels: against,
@@ -151,20 +158,18 @@ angular.module('app')
                barValueSpacing: 5,
 
                //Number - Spacing between data sets within X values
-               barDatasetSpacing: 1,
-
-               //String - A legend template
-               legendTemplate: '<ul class="tc-chart-js-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].fillColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>'
+               barDatasetSpacing: 1
            };
-      }
+      };
 
+      //Prepare bar graph to show number of centuries against teams
       $scope.prepareBarGraphAgainstTeam = function (centuryAgainstTeams){
-        var againstForCenturies = []
-        var numberOfCenturies = []
+        var againstForCenturies = [];
+        var numberOfCenturies = [];
         for(var centuryKey in centuryAgainstTeams) {
           if(centuryAgainstTeams.hasOwnProperty(centuryKey)) {
             againstForCenturies.push(centuryKey);
-            numberOfCenturies.push(centuryAgainstTeams[centuryKey].length)
+            numberOfCenturies.push(centuryAgainstTeams[centuryKey].length);
           }
         }
         $scope.bardataAgainstTeam = {
@@ -209,55 +214,57 @@ angular.module('app')
                barValueSpacing: 5,
 
                //Number - Spacing between data sets within X values
-               barDatasetSpacing: 1,
-
-               //String - A legend template
-               legendTemplate: '<ul class="tc-chart-js-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].fillColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>'
+               barDatasetSpacing: 1
            };
-      }
+      };
 
-
+      // Prepare Line Graph to show centuries and half centuries over the year
       $scope.prepareLineGraph = function(centuryByYear,halfCenturyByYear){
-          var yearOfcenturies = []
-          var numberOfCenturies = []
+          var yearOfcenturies = [];
+          var numberOfCenturies = [];
 
           for(var century in centuryByYear) {
             if(centuryByYear.hasOwnProperty(century)) {
               yearOfcenturies.push(century);
-              numberOfCenturies.push(centuryByYear[century].length)
+              numberOfCenturies.push(centuryByYear[century].length);
             }
           }
-          var yearOfhalfCenturies = []
-          var numberOfHalfCenturies = []
+          var yearOfhalfCenturies = [];
+          var numberOfHalfCenturies = [];
 
           for(var halfCentury in halfCenturyByYear) {
             if(halfCenturyByYear.hasOwnProperty(halfCentury)) {
               yearOfhalfCenturies.push(halfCentury);
-              numberOfHalfCenturies.push(halfCenturyByYear[halfCentury].length)
+              numberOfHalfCenturies.push(halfCenturyByYear[halfCentury].length);
             }
           }
+          // Now since there can be years when he scored a century and did not score a half century and vice versa
+          // We need to find years for both seperately and take a union of them
+
           var yearWithNoHalfCentury = _.filter(yearOfcenturies, function(el){
-            return yearOfhalfCenturies.indexOf(el) < 0
-          })
+            return yearOfhalfCenturies.indexOf(el) < 0;
+          });
           var yearWithNoCentury = _.filter(yearOfhalfCenturies, function(el){
-            return yearOfcenturies.indexOf(el) < 0
-          })
+            return yearOfcenturies.indexOf(el) < 0;
+          });
 
           // Taking union of both years of centuries and half centuries, CLEAN IT UP LATER
-          var allYearsForData = _.union(yearOfcenturies,yearOfhalfCenturies).sort()
+          var allYearsForData = _.union(yearOfcenturies,yearOfhalfCenturies).sort();
           var indexOfNoHalfcentury = yearWithNoHalfCentury.map(function(res){
-              return allYearsForData.indexOf(res)
-          })
+              return allYearsForData.indexOf(res);
+          });
           var indexOfNoCentury = yearWithNoCentury.map(function(res){
-              return allYearsForData.indexOf(res)
-          })
-          //Add insert method add prototype level later
+              return allYearsForData.indexOf(res);
+          });
+          // Add insert method add prototype level later if this type of functionality is required frequently
+          // Since we have the years without century and without half century we can add 0 in their respective arrays
+          // for those years
           indexOfNoCentury.map(function(res){
             return numberOfCenturies.splice(res, 0, 0);
-          })
+          });
           indexOfNoHalfcentury.map(function(res){
             return numberOfHalfCenturies.splice(res, 0, 0);
-          })
+          });
           $scope.lineData = {
           labels: allYearsForData,
           datasets: [
@@ -285,7 +292,7 @@ angular.module('app')
         };
 
         // Chart.js Options
-        $scope.lineOptions =  {
+        $scope.lineOptions = {
 
           // Sets the chart to be responsive
           responsive: true,
@@ -330,12 +337,10 @@ angular.module('app')
           onAnimationProgress: function(){},
 
           // Function - on animation complete
-          onAnimationComplete: function(){},
+          onAnimationComplete: function(){}
 
-          //String - A legend template
-          legendTemplate : '<ul class="tc-chart-js-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].strokeColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>'
         };
-      }
+      };
       $scope.prepareDoughnutChart = function(won, lost, tied, noresult){
         $scope.resources = [{
                value: won,
@@ -390,12 +395,9 @@ angular.module('app')
                //Boolean - Whether we animate scaling the Doughnut from the centre
                animateScale: false,
 
-               //String - A legend template
-               legendTemplate: '<ul class="tc-chart-js-legend"><% for (var i=0; i<segments.length; i++){%><li><span style="background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>'
-
            };
 
-      }
+      };
 
       $scope.prepareConversionRatePieChart = function(fifty,hundred){
             $scope.conversionData = [
@@ -414,7 +416,7 @@ angular.module('app')
         ];
 
         // Chart.js Options
-        $scope.conversionOptions =  {
+        $scope.conversionOptions = {
 
           // Sets the chart to be responsive
           responsive: true,
@@ -441,13 +443,8 @@ angular.module('app')
           animateRotate : true,
 
           //Boolean - Whether we animate scaling the Doughnut from the centre
-          animateScale : false,
-
-          //String - A legend template
-          legendTemplate : '<ul class="tc-chart-js-legend"><% for (var i=0; i<segments.length; i++){%><li><span style="background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>'
+          animateScale : false
 
         };
-      }
-
-
-    })
+      };
+    });

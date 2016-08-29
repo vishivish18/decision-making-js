@@ -1,10 +1,15 @@
+// Runs Stats controller
+// This controller is attached to a directive - runsStats
+// and the purpose of this controller is to work on the runsStats passed to its $scope via its attribute
 angular.module('app')
     .controller('runsStatsCtrl', function($scope) {
+      // Watch for the $scope.centuryStats variable to get the data from attribute
       $scope.$watch(function() {
              return $scope.runsStats;
            }, function(n) {
-               if(!n)return
-               $scope.analyzeInnings($scope.runsStats)
+               if(!n)return;
+               // If it has received data then start working on Analyzing Centuries
+               $scope.analyzeInnings($scope.runsStats);
            });
 
 
@@ -30,49 +35,48 @@ angular.module('app')
           var year = res.year;
           var team = res.against;
           if(typeof(runsByYear[year]) == "undefined"){
-              runsByYear[year] = []
+              runsByYear[year] = [];
           }
           if(typeof(runsByYear[year]) == "number"){
-              runsByYear[year] += parseInt(res.runs)
+              runsByYear[year] += parseInt(res.runs);
           }else{
-            runsByYear[year] = parseInt(res.runs)
+            runsByYear[year] = parseInt(res.runs);
           }
 
           //get runs against teams
           if(typeof(runsAgainstTeams[team]) == "undefined"){
-              runsAgainstTeams[team] = []
+              runsAgainstTeams[team] = [];
           }
           if(typeof(runsAgainstTeams[team]) == "number"){
-              return runsAgainstTeams[team] += parseInt(res.runs)
+              return runsAgainstTeams[team] += parseInt(res.runs);
           }else{
-            return runsAgainstTeams[team] = parseInt(res.runs)
+            return runsAgainstTeams[team] = parseInt(res.runs);
           }
-        })
-        $scope.prepareRunsByYearGraph(runsByYear)
-        $scope.prepareRunsByTeamGraph(runsAgainstTeams)
-        $scope.prepareRunsByInningsGraph(runsFirstInnings, runsSecondInnings)
-        $scope.prepareAverageByInningsGraph(runsFirstInnings,firstInnings,runsStats.firstInningsNotouts,runsSecondInnings, secondInnings,runsStats.secondInningsNotouts)
-
-      }
+        });
+        $scope.prepareRunsByYearGraph(runsByYear);
+        $scope.prepareRunsByTeamGraph(runsAgainstTeams);
+        $scope.prepareRunsByInningsGraph(runsFirstInnings, runsSecondInnings);
+        $scope.prepareAverageByInningsGraph(runsFirstInnings,firstInnings,runsStats.firstInningsNotouts,runsSecondInnings, secondInnings,runsStats.secondInningsNotouts);
+      };
 
 
       $scope.prepareRunsByYearGraph = function (runsByYear){
-        var years = []
-        var runs = []
+        var years = [];
+        var runs = [];
         for(var year in runsByYear) {
           if(runsByYear.hasOwnProperty(year)) {
             years.push(year);
-            runs.push(runsByYear[year])
+            runs.push(runsByYear[year]);
           }
         }
         var colors = [];
         runs.map(function(res, key){
           if(res >= 1000){
-            return colors[key] = "#FFFF00"
+            return colors[key] = "#FFFF00";
           }else{
-            return colors[key] = "#0084FF"
+            return colors[key] = "#0084FF";
           }
-        })
+        });
 
         $scope.yearBardata = {
                labels: years,
@@ -116,19 +120,17 @@ angular.module('app')
                barValueSpacing: 5,
 
                //Number - Spacing between data sets within X values
-               barDatasetSpacing: 1,
+               barDatasetSpacing: 1
 
-               //String - A legend template
-               legendTemplate: '<ul class="tc-chart-js-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].fillColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>'
            };
-      }
+      };
       $scope.prepareRunsByTeamGraph = function (runsAgainstTeams){
-        var teams = []
-        var runs = []
+        var teams = [];
+        var runs = [];
         for(var team in runsAgainstTeams) {
           if(runsAgainstTeams.hasOwnProperty(team)) {
             teams.push(team);
-            runs.push(runsAgainstTeams[team])
+            runs.push(runsAgainstTeams[team]);
           }
         }
         $scope.teamBardata = {
@@ -173,12 +175,9 @@ angular.module('app')
                barValueSpacing: 5,
 
                //Number - Spacing between data sets within X values
-               barDatasetSpacing: 1,
-
-               //String - A legend template
-               legendTemplate: '<ul class="tc-chart-js-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].fillColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>'
+               barDatasetSpacing: 1
            };
-      }
+      };
       $scope.prepareRunsByInningsGraph = function(firstInnings, secondInnings){
         $scope.inniningsRunsresources = [{
                value: firstInnings,
@@ -220,14 +219,11 @@ angular.module('app')
                animateRotate: true,
 
                //Boolean - Whether we animate scaling the Doughnut from the centre
-               animateScale: false,
-
-               //String - A legend template
-               legendTemplate: '<ul class="tc-chart-js-legend"><% for (var i=0; i<segments.length; i++){%><li><span style="background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>'
+               animateScale: false
 
            };
 
-      }
+      };
 
       $scope.prepareAverageByInningsGraph = function(runsFirstInnings,firstInnings,firstInningsNotouts,runsSecondInnings, secondInnings,secondInningsNotouts){
         var firstInningsAverage = runsFirstInnings / (firstInnings - firstInningsNotouts);
@@ -249,7 +245,7 @@ angular.module('app')
         ];
 
         // Chart.js Options
-        $scope.averageOptions =  {
+        $scope.averageOptions = {
 
           // Sets the chart to be responsive
           responsive: true,
@@ -276,15 +272,8 @@ angular.module('app')
           animateRotate : true,
 
           //Boolean - Whether we animate scaling the Doughnut from the centre
-          animateScale : false,
-
-          //String - A legend template
-          legendTemplate : '<ul class="tc-chart-js-legend"><% for (var i=0; i<segments.length; i++){%><li><span style="background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>'
+          animateScale : false
 
         };
-      }
-
-
-
-
-})
+      };
+});

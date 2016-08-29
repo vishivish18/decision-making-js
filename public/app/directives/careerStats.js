@@ -6,5 +6,5 @@ angular.module('app')
                 stats: '=item',
             },
             templateUrl: 'partials/careerStats.html'
-        }
-    })
+        };
+    });

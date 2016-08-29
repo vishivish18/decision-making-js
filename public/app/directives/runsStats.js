@@ -7,5 +7,5 @@ angular.module('app')
             },
             templateUrl: 'partials/runsStats.html',
             controller: 'runsStatsCtrl'
-        }
-    })
+        };
+    });

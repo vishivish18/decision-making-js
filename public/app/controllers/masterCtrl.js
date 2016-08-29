@@ -1,4 +1,5 @@
 angular.module('app')
     .controller('masterCtrl', function() {
-        console.info("masterCtrl");
-    })
+        // main controller binded to body of the app, actions required at global level can be done here
+        console.info("App Loaded");
+    });

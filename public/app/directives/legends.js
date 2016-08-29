@@ -7,5 +7,5 @@ angular.module('app')
                 color: '@'
             },
             templateUrl: 'partials/legends.html'
-        }
-    })
+        };
+    });
