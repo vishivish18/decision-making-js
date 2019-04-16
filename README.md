@@ -3,7 +3,7 @@ A project to make sense out of a CSV data, analyze it, and then visualize it to 
 
 
 ## [Live demo here](http://decision-making.vishalranjan.in/)
-[![Website](https://img.shields.io/website-up-down-green-red/http/shields.io.svg?maxAge=2592000)](http://decision-making.vishalranjan.in/) [![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](http://mit-license.org/)
+[![Website](https://img.shields.io/website-up-down-green-red/http/shields.io.svg?maxAge=2592000)](http://172.25.120.21:9005) [![status](https://img.shields.io/static/v1.svg?label=status&message=status-healthy&color=green)]
 
 
 ### Setup
