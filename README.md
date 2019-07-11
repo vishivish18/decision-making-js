@@ -16,15 +16,15 @@ data  = {url=http://www.example.com}
 
 
 ### Setup
-* git clone `https://github.com/vishivish18/web-scrapper-api.git`
+* `git clone https://github.com/vishivish18/web-scrapper-api.git`
 * Run `bundle install` from project directory
 * Run `raisl s` to start project and the magic begins on `localhost:3000`
 
 ### Dependencies
 
 * `ruby 2.6.3` 
-* 'rails 5.2.3'
-* 'nokogiri 1..6.8'
+* `rails 5.2.3`
+* `nokogiri 1..6.8`
 
 
 ### Architecture
